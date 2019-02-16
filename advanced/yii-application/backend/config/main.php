@@ -47,4 +47,5 @@ return [
 
     ],
     'params' => $params,
+    'layout'=>'admin-lte/main'
 ];
