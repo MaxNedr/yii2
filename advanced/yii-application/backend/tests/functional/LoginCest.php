@@ -36,7 +36,6 @@ class LoginCest
         $I->fillField('Username', 'erau');
         $I->fillField('Password', 'password_0');
         $I->click('login-button');
-
         $I->seeLink('Sign out');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
