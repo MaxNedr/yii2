@@ -88,10 +88,10 @@ class Project extends \yii\db\ActiveRecord
 
     /**
      * {@inheritdoc}
-     * @return ProjectQuery the active query used by this AR class.
+     * @return \common\models\query\ProjectQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new ProjectQuery(get_called_class());
+        return new \common\models\query\ProjectQuery(get_called_class());
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace common\models;
+namespace common\models\query;
 
 /**
- * This is the ActiveQuery class for [[ProjectUser]].
+ * This is the ActiveQuery class for [[\common\models\ProjectUser]].
  *
- * @see ProjectUser
+ * @see \common\models\ProjectUser
  */
 class ProjectUserQuery extends \yii\db\ActiveQuery
 {
@@ -16,7 +16,7 @@ class ProjectUserQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return ProjectUser[]|array
+     * @return \common\models\ProjectUser[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class ProjectUserQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return ProjectUser|array|null
+     * @return \common\models\ProjectUser|array|null
      */
     public function one($db = null)
     {
