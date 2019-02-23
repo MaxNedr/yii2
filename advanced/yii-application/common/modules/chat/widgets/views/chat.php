@@ -1,0 +1,1 @@
+<textarea  id="ChatMessages" cols="100" rows="10" readonly></textarea>
