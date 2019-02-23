@@ -10,7 +10,7 @@ conn.onerror = function () {
 };
 
 $('#sendMessage').on('click', () => {
-    if($('#newMessage').val()){
+    if ($('#newMessage').val()) {
         conn.send($('#newMessage').val());
         $('#newMessage').val('');
     }
@@ -23,7 +23,7 @@ conn.onmessage = function (e) {
     console.log(e.data);
     var $el = $('li.messages-menu ul.menu li:first').clone();
     $el.find('p').text(e.data);
-    $el.find('h4').text('Websocket user');
+    $el.find('h4').text('Websocket User');
     $el.prependTo('li.messages-menu ul.menu');
 
     var cnt = $('li.messages-menu ul.menu li').length;
