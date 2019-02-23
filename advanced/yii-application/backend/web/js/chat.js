@@ -8,6 +8,16 @@ conn.onopen = function () {
 conn.onerror = function () {
     console.log('Connect fail!');
 };
+
+$('#sendMessage').on('click', () => {
+    if($('#newMessage').val()){
+        conn.send($('#newMessage').val());
+        $('#newMessage').val('');
+    }
+
+
+});
+
 conn.onmessage = function (e) {
     document.getElementById(idMessages).value = e.data + '\n' + document.getElementById(idMessages).value;
     console.log(e.data);
