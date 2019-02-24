@@ -4,12 +4,12 @@ namespace common\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Task;
+use common\models\Project;
 
 /**
- * TaskSearch represents the model behind the search form of `common\models\Task`.
+ * ProjectSearch represents the model behind the search form of `common\models\Project`.
  */
-class TaskSearch extends Task
+class ProjectSearchBackend extends Project
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,7 @@ class TaskSearch extends Task
     public function rules()
     {
         return [
-            [['id', 'project_id', 'executor_id', 'started_at', 'completed_at', 'creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'active', 'creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
             [['title', 'description'], 'safe'],
         ];
     }
@@ -40,7 +40,7 @@ class TaskSearch extends Task
      */
     public function search($params)
     {
-        $query = Task::find();
+        $query = Project::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +59,7 @@ class TaskSearch extends Task
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'project_id' => $this->project_id,
-            'executor_id' => $this->executor_id,
-            'started_at' => $this->started_at,
-            'completed_at' => $this->completed_at,
+            'active' => $this->active,
             'creator_id' => $this->creator_id,
             'updater_id' => $this->updater_id,
             'created_at' => $this->created_at,
