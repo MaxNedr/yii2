@@ -2,9 +2,9 @@
 
 namespace frontend\controllers;
 
+use common\models\search\ProjectSearchFrontend;
 use Yii;
 use common\models\Project;
-use common\models\search\ProjectSearchBackend;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -47,7 +47,7 @@ class ProjectController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProjectSearchBackend();
+        $searchModel = new ProjectSearchFrontend();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
