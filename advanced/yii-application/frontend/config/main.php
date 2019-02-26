@@ -41,9 +41,17 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/user'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/task'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/project'],
             ],
         ],
 
+    ],
+    'modules' => [
+        'api' => [
+            'class' => 'frontend\modules\api\Module',
+        ],
     ],
     'params' => $params,
 ];
