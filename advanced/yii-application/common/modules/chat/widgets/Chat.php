@@ -9,7 +9,7 @@ use Yii;
 class Chat extends \yii\bootstrap\Widget
 {
     public $port = 8081;
-    public $name = '';
+    public $name = 'user';
     public function init()
     {
        // ChatAsset::register($this->view);

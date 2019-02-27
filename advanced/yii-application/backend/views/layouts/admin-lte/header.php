@@ -30,7 +30,7 @@ use yii\helpers\Html;
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
-                                <li><!-- start message -->
+                                <li>
                                     <a href="#">
                                         <div class="pull-left">
                                             <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
@@ -43,11 +43,11 @@ use yii\helpers\Html;
                                         <p>Why not buy a new awesome theme?</p>
                                     </a>
                                 </li>
-                                <!-- end message -->
-                                <li>
+
+                                <!--<li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="<?= $directoryAsset ?>/img/user3-128x128.jpg" class="img-circle"
+                                            <img src="<?/*= $directoryAsset */?>/img/user3-128x128.jpg" class="img-circle"
                                                  alt="user image"/>
                                         </div>
                                         <h4>
@@ -60,7 +60,7 @@ use yii\helpers\Html;
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="<?= $directoryAsset ?>/img/user4-128x128.jpg" class="img-circle"
+                                            <img src="<?/*= $directoryAsset */?>/img/user4-128x128.jpg" class="img-circle"
                                                  alt="user image"/>
                                         </div>
                                         <h4>
@@ -73,7 +73,7 @@ use yii\helpers\Html;
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="<?= $directoryAsset ?>/img/user3-128x128.jpg" class="img-circle"
+                                            <img src="<?/*= $directoryAsset */?>/img/user3-128x128.jpg" class="img-circle"
                                                  alt="user image"/>
                                         </div>
                                         <h4>
@@ -86,7 +86,7 @@ use yii\helpers\Html;
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="<?= $directoryAsset ?>/img/user4-128x128.jpg" class="img-circle"
+                                            <img src="<?/*= $directoryAsset */?>/img/user4-128x128.jpg" class="img-circle"
                                                  alt="user image"/>
                                         </div>
                                         <h4>
@@ -95,7 +95,7 @@ use yii\helpers\Html;
                                         </h4>
                                         <p>Why not buy a new awesome theme?</p>
                                     </a>
-                                </li>
+                                </li>-->
                             </ul>
                         </li>
                         <li class="footer"><a href="#">See All Messages</a></li>
