@@ -14,6 +14,7 @@ use common\modules\chat\components\Chat;
 class DefaultController extends Controller
 {
 
+
     public function actionIndex()
     {
         $server = IoServer::factory(
