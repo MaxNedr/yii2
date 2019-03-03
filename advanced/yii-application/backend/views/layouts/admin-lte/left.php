@@ -12,6 +12,17 @@
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
+                        'label' => 'Model',
+                        'icon' => 'share',
+                         'url' => '#',
+                        'items' => [
+                            ['label' => 'User', 'icon' => 'file-code-o', 'url' => ['/user'],],
+                            ['label' => 'Project', 'icon' => 'dashboard', 'url' => ['/project'],],
+                            ['label' => 'Tasks', 'icon' => 'dashboard', 'url' => ['/task'],],
+
+                        ],
+                    ],
+                    [
                         'label' => 'Some tools',
                         'icon' => 'share',
                         'url' => '#',
