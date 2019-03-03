@@ -14,6 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <div class="img-responsive"><?=Html::img(
+            Yii::$app->user->identity->getThumbUploadUrl('avatar', \common\models\User::AVATAR_PREVIEW)
+        ) ?></div>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -38,8 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'access_token',
             'avatar',
             'status',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 

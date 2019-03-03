@@ -27,9 +27,13 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-     <?= $form->field($model, 'avatar')->fileInput(['accept' => 'image/*']) ?>
+    <?= $form->field($model, 'avatar')->fileInput(['accept' => 'image/*'])
+        ->label('Avatar'.Html::img(
+            $model->getThumbUploadUrl('avatar', \common\models\User::AVATAR_ICO))
+        )?>
 
     <?= $form->field($model, 'status')->dropDownList([\common\models\User::STATUS_LABELS]) ?>
+
 
     <div class="form-group ">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success ']) ?>

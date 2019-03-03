@@ -73,9 +73,10 @@ class User extends ActiveRecord implements IdentityInterface
                 'attribute' => 'avatar',
                 'scenarios' => [self::SCENARIO_UPDATE],
                 'placeholder' => '@frontend/web/assets/img/cat.png',
-                'path' => '@frontend/upload/user/{id}',
-                'url' => Yii::$app->params['hosts.front'] .
-                    Yii::getAlias('@web/upload/user/{id}'),
+                'path' => '@frontend/web/upload/user/{id}',
+                'url' => Yii::$app->params['front.scheme']
+                    . Yii::$app->params['hosts.front']
+                    . Yii::getAlias('@web/upload/user/{id}'),
                 'thumbs' => [
                     self::AVATAR_ICO => ['width' => 40, 'quality' => 90],
                     self::AVATAR_PREVIEW => ['width' => 200, 'height' => 200],
@@ -114,9 +115,9 @@ class User extends ActiveRecord implements IdentityInterface
         if (isset($this->password)) {
             $this->password_hash = \Yii::$app->getSecurity()->generatePasswordHash($this->password);
         }
-        /*if (!parent::beforeSave($insert)) {
+        if (!parent::beforeSave($insert)) {
             return false;
-        }*/
+        }
         if ($this->isNewRecord) {
             $this->generateAuthKey();
         }
