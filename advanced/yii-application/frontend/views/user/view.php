@@ -14,11 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <div class="img-responsive m-3"><?= Html::tag('img',
-            '',[
-                    'src'=>Yii::$app->user->identity->getThumbUploadUrl('avatar', \common\models\User::AVATAR_PREVIEW),
-                'class'=>'border border-primary rounded-circle']
-        ) ?></div>
+
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -42,8 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'access_token',
             'avatar',
             'status',
-            'created_at:datetime',
-            'updated_at:datetime',
+            'created_at',
+            'updated_at',
         ],
     ]) ?>
 

@@ -91,10 +91,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email', 'password'], 'required','on' => self::SCENARIO_INSERT],
+            [['username', 'email', 'password'], 'required', 'on' => self::SCENARIO_INSERT],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => self::STATUSES],
-           // [['username', 'email', 'auth_key', 'password'], 'safe'],
+            [['username', 'email', 'auth_key', 'password'], 'safe'],
             [
                 'avatar',
                 'image',
@@ -230,7 +230,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function setPassword($password)
     {
-            $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
 
     }
 
