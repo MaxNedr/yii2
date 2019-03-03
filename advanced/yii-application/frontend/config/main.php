@@ -50,7 +50,7 @@ return [
     ],
     'modules' => [
         'api' => [
-            'class' => 'frontend\modules\api\Module',
+            'class' => frontend\modules\api\Module::class,
         ],
     ],
     'params' => $params,
