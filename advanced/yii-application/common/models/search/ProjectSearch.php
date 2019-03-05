@@ -9,7 +9,7 @@ use common\models\Project;
 /**
  * ProjectSearch represents the model behind the search form of `common\models\Project`.
  */
-class ProjectSearchBackend extends Project
+class ProjectSearch extends Project
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,7 @@ class ProjectSearchBackend extends Project
     public function rules()
     {
         return [
-            [['id', 'active', 'creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'active', 'creator_id', 'updater_id', /*'created_at', 'updated_at'*/], 'integer'],
             [['title', 'description'], 'safe'],
         ];
     }

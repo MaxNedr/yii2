@@ -112,9 +112,6 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function beforeSave($insert)
     {
-        if (isset($this->password)) {
-            $this->password_hash = \Yii::$app->getSecurity()->generatePasswordHash($this->password);
-        }
         if (!parent::beforeSave($insert)) {
             return false;
         }
@@ -308,6 +305,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function getCreatedProjects()
     {
         return $this->hasMany(Project::class, ['creator_id' => 'id']);
+    }
+    public function findAllUsernames() {
+        return self::find()->select('username')->indexBy('id')->column();
     }
 
 }

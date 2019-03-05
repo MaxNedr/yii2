@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -26,6 +27,14 @@ use yii\behaviors\TimestampBehavior;
 class Project extends \yii\db\ActiveRecord
 {
     const RELATION_TASKS = 'tasks';
+    const STATUS_COMPLETED = 0;
+    const STATUS_ACTIVE = 10;
+    const STATUSES = [self::STATUS_COMPLETED, self::STATUS_ACTIVE];
+    const STATUS_LABELS = [
+        self::STATUS_COMPLETED => 'Completed',
+        self::STATUS_ACTIVE => 'Active'
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -37,11 +46,15 @@ class Project extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            ['class' => TimestampBehavior::className()],
-            ['class' => BlameableBehavior::className(),
+            ['class' => TimestampBehavior::class],
+            ['class' => BlameableBehavior::class,
                 'createdByAttribute' => 'creator_id',
                 'updatedByAttribute' => 'updater_id'
             ],
+            [
+                'class' => SaveRelationsBehavior::class,
+                'relations' => ['projectUsers']
+            ]
 
         ];
     }
@@ -83,7 +96,7 @@ class Project extends \yii\db\ActiveRecord
      */
     public function getCreator()
     {
-        return $this->hasOne(User::className(), ['id' => 'creator_id']);
+        return $this->hasOne(User::class, ['id' => 'creator_id']);
     }
 
     /**
@@ -91,7 +104,7 @@ class Project extends \yii\db\ActiveRecord
      */
     public function getUpdater()
     {
-        return $this->hasOne(User::className(), ['id' => 'updater_id']);
+        return $this->hasOne(User::class, ['id' => 'updater_id']);
     }
 
     /**
@@ -99,14 +112,15 @@ class Project extends \yii\db\ActiveRecord
      */
     public function getProjectUsers()
     {
-        return $this->hasMany(ProjectUser::className(), ['project_id' => 'id']);
+        return $this->hasMany(ProjectUser::class, ['project_id' => 'id']);
     }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getTasks()
     {
-        return $this->hasMany(Task::className(), ['project_id' => 'id']);
+        return $this->hasMany(Task::class, ['project_id' => 'id']);
     }
 
     /**
