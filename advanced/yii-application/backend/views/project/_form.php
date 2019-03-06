@@ -34,32 +34,41 @@ use unclead\multipleinput\MultipleInput;
 
     <?= $form->field($model, 'updated_at')->textInput() ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
-
     <?php if (!$model->isNewRecord): ?>
-        <?= $form->field($model, 'users')->widget(MultipleInput::className(), [
-            'max' => 4,
-            'columns' => [
-                [
-                    'name'  => 'user_id',
-                    'type'  => 'dropDownList',
-                    'title' => 'Users',
-                    'defaultValue' => 1,
-                    'items' => (new common\models\User)->findAllUsernames()
-
-                ], [
-                    'name' => 'role',
-                    'title' => 'Role',
-                    'type' => 'dropDownList',
-                    'items' => \common\models\ProjectUser::ROLE_LABELS,
+        <?= $form->field($model, \common\models\Project::RELATION_PROJECT_USERS)
+            ->widget(MultipleInput::class, [
+                // https://github.com/unclead/yii2-multiple-input
+                'id' => 'project_users_role_widget',
+                'max' => 10,
+                'min' => 0,
+                'columns' => [
+                    [
+                        'name' => 'project_id',
+                        'type' => 'hiddenInput',
+                        'defaultValue' => $model->id,
+                    ],
+                    [
+                        'name' => 'user_id',
+                        'title' => 'User name',
+                        'type' => 'dropDownList',
+                        'items' => (new common\models\User)->findAllUsernames(),
+                    ],
+                    [
+                        'name' => 'role',
+                        'title' => 'Role',
+                        'type' => 'dropDownList',
+                        'items' => \common\models\ProjectUser::ROLE_LABELS,
+                    ],
                 ],
-
-            ]
-        ]);
+            ]);
         ?>
     <?php endif; ?>
+
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        </div>
+    </div>
 
     <?php ActiveForm::end(); ?>
 
