@@ -26,13 +26,13 @@ use unclead\multipleinput\MultipleInput;
 
     <?= $form->field($model, 'active')->dropDownList([\common\models\Project::STATUS_LABELS]) ?>
 
-    <?= $form->field($model, 'creator_id')->textInput() ?>
+    <!--<?/*= $form->field($model, 'creator_id')->textInput() */?>
 
-    <?= $form->field($model, 'updater_id')->textInput() ?>
+    <?/*= $form->field($model, 'updater_id')->textInput() */?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+    <?/*= $form->field($model, 'created_at')->textInput() */?>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?/*= $form->field($model, 'updated_at')->textInput() */?>-->
 
     <?php if (!$model->isNewRecord): ?>
         <?= $form->field($model, \common\models\Project::RELATION_PROJECT_USERS)

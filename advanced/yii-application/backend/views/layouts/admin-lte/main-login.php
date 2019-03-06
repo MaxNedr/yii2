@@ -1,4 +1,5 @@
 <?php
+
 use backend\assets\AppAsset;
 use yii\helpers\Html;
 
@@ -18,12 +19,14 @@ dmstr\web\AdminLteAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body class="login-page">
+<div class="container">
 
-<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
     <?= $content ?>
 
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
+</div>
 </body>
 </html>
 <?php $this->endPage() ?>

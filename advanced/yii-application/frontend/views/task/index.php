@@ -28,7 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'description:ntext',
+            [
+                'attribute' => 'description',
+                'value'=>  function ($model) {
+                    return mb_substr($model->description, 0, 50);
+                },
+
+            ],
             'project_id',
             'executor_id',
             //'started_at',

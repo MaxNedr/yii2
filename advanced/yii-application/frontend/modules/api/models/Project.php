@@ -13,7 +13,7 @@ class Project extends \common\models\Project
             'id',
             'title',
             'description_short' => function ($model) {
-                return substr($model->description, 0, 50);
+                return mb_substr($model->description, 0, 50);
             },
             'active'
         ];

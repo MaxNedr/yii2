@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\TaskSearchBackend */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -28,7 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'description:ntext',
+            [
+                'attribute' => 'description',
+                'value'=>  function ($model) {
+                return mb_substr($model->description, 0, 50);
+            },
+
+            ],
             'project_id',
             'executor_id',
             //'started_at',

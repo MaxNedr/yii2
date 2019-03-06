@@ -16,9 +16,9 @@
                         'icon' => 'share',
                          'url' => '#',
                         'items' => [
-                            ['label' => 'Users', 'icon' => 'users', 'url' => ['/user'],],
-                            ['label' => 'Projects', 'icon' => 'cubes', 'url' => ['/project'],],
-                            ['label' => 'Tasks', 'icon' => 'tasks', 'url' => ['/task'],],
+                            ['label' => 'Users', 'icon' => 'users', 'url' => ['/users'],],
+                            ['label' => 'Projects', 'icon' => 'cubes', 'url' => ['/projects'],],
+                            ['label' => 'Tasks', 'icon' => 'tasks', 'url' => ['/tasks'],],
 
                         ],
                     ],
