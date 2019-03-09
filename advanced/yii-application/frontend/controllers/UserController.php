@@ -108,6 +108,26 @@ class UserController extends Controller
     }
 
     /**
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionProfile()
+    {
+        $id = Yii::$app->user->identity->id;
+        $model = $this->findModel($id);
+        $model->scenario = User::SCENARIO_UPDATE;
+
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
