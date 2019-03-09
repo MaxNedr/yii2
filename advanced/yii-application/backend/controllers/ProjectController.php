@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Project;
+use common\models\User;
 use common\models\search\ProjectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -21,7 +22,7 @@ class ProjectController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -85,16 +86,22 @@ class ProjectController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $data = User::find()->select('username')->indexBy('id')->column();
+        $projectUsers = $model->getUsersData();
 
-        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }*/
-        if ($this->loadModel($model) && $model->save()){
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->loadModel($model) && $model->save()) {
+            if ($diffRoles = array_diff_assoc($model->getUsersData(), $projectUsers)) {
+                foreach ($diffRoles as $userId => $diffRole) {
+                    Yii::$app->projectService->assignRole($model, User::findOne($userId), $diffRole);
+                }
+            }
+
+            return $this->redirect(['view', 'id' => $model->id, 'data' => $data,]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'data' => $data,
         ]);
     }
 
