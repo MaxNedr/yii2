@@ -17,7 +17,7 @@ return [
             'class' => common\services\ProjectService::class,
             'on ' . \common\services\ProjectService::EVENT_ASSIGN_ROLE =>
                 function (\common\services\AssignRoleEvent $e) {
-                    Yii::$app->notificationService->mailSend($e);
+                    Yii::$app->notificationService->notificationOfNewRoles($e);
                 }
         ],
     ],

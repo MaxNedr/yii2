@@ -16,14 +16,15 @@ class EmailService extends Component
     /**
      * @param $to
      * @param $subject
-     * @param $views
+     * @param $viewHTML
+     * @param $viewText
      * @param $data
      */
-    function send($to, $subject, $views, $data )
+    function send($to, $subject, $viewHTML, $viewText, $data)
     {
-         \Yii::$app
+        \Yii::$app
             ->mailer
-            ->compose($views, $data)
+            ->compose(['html' => $viewHTML, 'text' => $viewText], $data)
             ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
             ->setTo($to)
             ->setSubject($subject)
