@@ -12,16 +12,15 @@ use yii\base\Component;
 class NotificationService extends Component
 {
     /**
-     * @param User $user
-     * @param Project $project
-     * @param $role string
+     * @param $event
      */
-    public function mailSend( $project, $user, $role)
+    public function mailSend( $event)
     {
-        $to = $user->email;
-        $subject = "New role" . $role;
+
+        $to = $event->user->email;
+        $subject = "New role" . $event->role;
         $views = ['html' => 'assignRoleToProject-html', 'text' => 'assignRoleToProject-text'];
-        $data = ['user' => $user, 'project' => $project, 'role' => $role];
+        $data = ['user' => $event->user, 'project' => $event->project, 'role' => $event->role];
         Yii::$app->emailService->send($to, $subject, $views, $data);
     }
 }
