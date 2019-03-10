@@ -11,9 +11,9 @@ class AssignRoleEvent extends \yii\base\Event
     public $user;
     public $role;
 
-    public function dump(){
+    /*public function dump(){
         return ['project'=>$this->project->id, 'user'=> $this->user->id, 'role'=>$this->role];
-    }
+    }*/
 }
 
 class ProjectService extends \yii\base\Component
@@ -23,7 +23,7 @@ class ProjectService extends \yii\base\Component
     /**
      * @param Project $project
      * @param User $user
-     * @param $role
+     * @param $role string
      */
     function assignRole(Project $project, User $user, $role){
         $event = new AssignRoleEvent();

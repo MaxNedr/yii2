@@ -13,6 +13,12 @@ use yii\base\Component;
 
 class EmailService extends Component
 {
+    /**
+     * @param $to
+     * @param $subject
+     * @param $views
+     * @param $data
+     */
     function send($to, $subject, $views, $data )
     {
          \Yii::$app
