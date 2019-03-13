@@ -42,5 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
         ],
     ]) ?>
+    <?php echo \yii2mod\comments\widgets\Comment::widget([
+        'model' => $model,
+    ]); ?>
 
 </div>
