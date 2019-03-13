@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="img-responsive m-3"><?= Html::tag('img',
             '', [
-                'src' => Yii::$app->user->identity->getThumbUploadUrl('avatar', \common\models\User::AVATAR_PREVIEW),
+                'src' => $model->getThumbUploadUrl('avatar', \common\models\User::AVATAR_PREVIEW),
                 'class' => 'border border-primary rounded-circle']
         ) ?></div>
     <p>

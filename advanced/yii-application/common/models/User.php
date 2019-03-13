@@ -91,7 +91,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email', 'password'], 'required', 'on' => self::SCENARIO_INSERT],
+            [['username', 'email'], 'required'],
+            [['username', 'email'], 'trim'],
+            [['username', 'email'], 'unique'],
+            [['username', 'email'], 'required', 'on' => [self::SCENARIO_INSERT]],
+            [['password'], 'required', 'except' => [self::SCENARIO_UPDATE]],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => self::STATUSES],
             [['username', 'email', 'auth_key', 'password'], 'safe'],
@@ -102,6 +106,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'on' => [self::SCENARIO_UPDATE]
             ],
             ['email', 'email'],
+            [['username', 'email'], 'string', 'max' => 255],
         ];
     }
 
@@ -306,8 +311,28 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(Project::class, ['creator_id' => 'id']);
     }
+
+    /**
+     * @return array
+     */
     public function findAllUsernames() {
         return self::find()->select('username')->indexBy('id')->column();
+    }
+
+    /**
+     *
+     */
+    public function getAvatar()
+    {
+        return $this->getThumbUploadUrl('avatar',self::AVATAR_ICO);
+    }
+
+    /**
+     *
+     */
+    public function getUsername()
+    {
+        return $this->username . '(' . $this->id . ')';
     }
 
 }

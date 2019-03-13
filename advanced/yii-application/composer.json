@@ -23,7 +23,8 @@
         "mohorev/yii2-upload-behavior": "*",
         "yiisoft/yii2-imagine": "^2.1",
         "la-haute-societe/yii2-save-relations-behavior": "*",
-        "unclead/yii2-multiple-input": "~2.0"
+        "unclead/yii2-multiple-input": "~2.0",
+        "yii2mod/yii2-comments": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

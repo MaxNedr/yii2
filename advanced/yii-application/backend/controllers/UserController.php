@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -75,7 +75,7 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
-        $model->scenario = User::SCENARIO_INSERT;
+        $model->setScenario(User::SCENARIO_INSERT);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
