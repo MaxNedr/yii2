@@ -31,4 +31,12 @@ class ProjectUserQuery extends \yii\db\ActiveQuery
     {
         return parent::one($db);
     }
+    /**
+     * @param $userId
+     * @return ProjectUserQuery
+     */
+    public function byUser($userId)
+    {
+        return $this->andWhere(['user_id' => $userId]);
+    }
 }
