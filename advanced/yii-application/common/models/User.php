@@ -125,6 +125,15 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return true;
     }
+    /**
+     * {@inheritdoc}
+     * @return \common\models\query\ProjectQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new \common\models\query\UserQuery(get_called_class());
+    }
+
 
     /**
      * {@inheritdoc}
