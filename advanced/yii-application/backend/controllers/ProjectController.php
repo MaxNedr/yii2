@@ -49,11 +49,7 @@ class ProjectController extends Controller
     {
         $searchModel = new ProjectSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        /**
-         * @var $query ProjectQuery
-         */
-        $query = $dataProvider->query;
-        $query->byUser(Yii::$app->user->id);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
