@@ -18,7 +18,8 @@ class TaskService extends Component
      * @param User $user
      * @return bool
      */
-    public function canManage(Project $project, User $user){
+    public function canManage(Project $project, User $user)
+    {
         return Yii::$app->projectService->hasRole($project, $user, ProjectUser::ROLE_MANAGER);
 
     }
@@ -28,21 +29,38 @@ class TaskService extends Component
      * @param User $user
      * @return bool
      */
-    public function canTake(Task $task, User $user){
+    public function canTake(Task $task, User $user)
+    {
         $accessToTask = Yii::$app->projectService->hasRole(
             Project::findOne($task->project_id),
             $user,
             ProjectUser::ROLE_DEVELOPER);
 
-        return $accessToTask && !$task->executor_id ;
+        return $accessToTask && !$task->executor_id;
     }
-    public function canCompele(Task $task, User $user){
 
+    /**
+     * @param Task $task
+     * @param User $user
+     * @return bool
+     */
+    public function canComplete(Task $task, User $user)
+    {
+        return $task->executor_id == $user->id && !$task->completed_at;
     }
-    public function takeTask(Task $task, User $user){
 
+    /**
+     * @param Task $task
+     * @param User $user
+     * @return bool
+     */
+    public function takeTask(Task $task, User $user)
+    {
+        return $task->started_at = time() && $task->executor_id = $user->id && $task->save();
     }
-    public function completeTask(Task $task){
 
+    public function completeTask(Task $task)
+    {
+        return $task->completed_at = time() && $task->save();
     }
 }
