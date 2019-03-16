@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Project;
 use common\models\query\ProjectQuery;
 use common\models\search\TaskSearchFrontend;
 use Yii;
@@ -30,7 +31,6 @@ class TaskController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['create', 'update', 'delete'],
                 'rules' => [
                     [
 
@@ -83,6 +83,7 @@ class TaskController extends Controller
     public function actionCreate()
     {
         $model = new Task();
+        $projects = Project::find()->select('title')->indexBy('id')->column();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'The task is create successfully');
@@ -91,6 +92,7 @@ class TaskController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'projects'=>$projects,
         ]);
     }
 
@@ -104,13 +106,15 @@ class TaskController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $projects = Project::find()->select('title')->indexBy('id')->column();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'projects'=>$projects,
+
         ]);
     }
 
