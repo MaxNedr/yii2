@@ -111,10 +111,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'visibleButtons' => [
                     'update' => function (\common\models\Task $model) {
-                        return Yii::$app->taskService->canManage(\common\models\Project::findOne($model->project_id), Yii::$app->user->identity);
+                        return Yii::$app->taskService
+                            ->canManage(
+                                    \common\models\Project::findOne($model->project_id),
+                                    Yii::$app->user->identity
+                            );
                     },
                     'delete' => function (\common\models\Task $model) {
-                        return Yii::$app->taskService->canManage(\common\models\Project::findOne($model->project_id), Yii::$app->user->identity);
+                        return Yii::$app->taskService
+                            ->canManage(
+                                    \common\models\Project::findOne($model->project_id),
+                                    Yii::$app->user->identity
+                            );
                     },
                     'take' => function (\common\models\Task $model) {
                         return Yii::$app->taskService->canTake($model, Yii::$app->user->identity);
