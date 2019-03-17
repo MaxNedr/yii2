@@ -56,8 +56,14 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                     'attribute'=>'executor',
                 'content'=>function($model){
+
                     $executor = \common\models\User::findOne(['id' => $model->executor_id]);
-                    return Html::a($executor->username, 'user/' . $executor->id);
+                    if ($executor){
+                        return Html::a($executor->username, 'user/' . $executor->id);
+                    }else{
+                        return null;
+                    }
+
                 },
                 'filter' => Html::activeDropDownList(
                     $searchModel,
@@ -92,16 +98,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {take} {pass}',
+                'template' => '{view} {update} {delete} {take} {finish}',
                 'buttons' => [
-                    'take' => function ( \common\models\Task $model) {
-                        $icon = \yii\bootstrap\Html::icon('hand-right');
+                    'take' => function ( $url, \common\models\Task $model, $key) {
+                        $icon = \yii\bootstrap\Html::icon('glyphicon glyphicon-copy');
                         return Html::a($icon, ['task/take', 'id' => $model->id], ['data' => [
                             'confirm' => 'Do you take task?',
                             'method' => 'post',
                         ]]);
                     },
-                    'pass' => function ( \common\models\Task $model) {
+                    'finish' => function ( $url, \common\models\Task $model, $key) {
                         $icon = \yii\bootstrap\Html::icon('glyphicon glyphicon-saved');
                         return Html::a($icon, ['task/complete', 'id' => $model->id], ['data' => [
                             'confirm' => 'Do you complete task?',
@@ -127,7 +133,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'take' => function (\common\models\Task $model) {
                         return Yii::$app->taskService->canTake($model, Yii::$app->user->identity);
                     },
-                    'pass' => function (\common\models\Task $model) {
+                    'finish' => function (\common\models\Task $model) {
                         return Yii::$app->taskService->canComplete($model, Yii::$app->user->identity);
                     },
                 ],

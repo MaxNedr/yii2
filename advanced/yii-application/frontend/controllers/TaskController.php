@@ -119,6 +119,41 @@ class TaskController extends Controller
     }
 
     /**
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionTake($id)
+    {
+        $model = $this->findModel($id);
+
+        if (Yii::$app->taskService->takeTask($model,Yii::$app->user->identity)) {
+            Yii::$app->session->setFlash('success', 'Task: ' . $model->title . ' is taken in work');
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+        Yii::$app->session->setFlash('warning', "Something's wrong");
+        return $this->redirect(['task']);
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionComplete($id)
+    {
+        $model = $this->findModel($id);
+
+        if (Yii::$app->taskService->completeTask($model)) {
+            Yii::$app->session->setFlash('success', 'Task: ' . $model->title . ' complete successfully');
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+        Yii::$app->session->setFlash('warning', "Something's wrong");
+        return $this->redirect(['task']);
+
+        ;
+    }
+    /**
      * Deletes an existing Task model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id

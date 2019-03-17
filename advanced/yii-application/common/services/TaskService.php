@@ -56,11 +56,14 @@ class TaskService extends Component
      */
     public function takeTask(Task $task, User $user)
     {
-        return $task->started_at = time() && $task->executor_id = $user->id && $task->save();
+        $task->started_at = time();
+        $task->executor_id = $user->id;
+        return  $task->save();
     }
 
     public function completeTask(Task $task)
     {
-        return $task->completed_at = time() && $task->save();
+        $task->completed_at = time();
+        return  $task->save();
     }
 }
