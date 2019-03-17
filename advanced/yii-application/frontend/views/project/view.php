@@ -35,8 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'active',
             'creator_id',
             'updater_id',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
     <?php echo \yii2mod\comments\widgets\Comment::widget([

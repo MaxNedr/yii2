@@ -38,12 +38,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'project_id',
             'executor_id',
-            'started_at',
-            'completed_at',
+            'started_at:datetime',
+            'completed_at:datetime',
             'creator_id',
             'updater_id',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
     <?php echo \yii2mod\comments\widgets\Comment::widget([
