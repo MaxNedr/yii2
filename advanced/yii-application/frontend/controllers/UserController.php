@@ -31,7 +31,6 @@ class UserController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-
                         'allow' => true,
                         'roles' => ['@'],
                     ],

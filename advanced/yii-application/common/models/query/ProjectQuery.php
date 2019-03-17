@@ -39,9 +39,9 @@ class ProjectQuery extends \yii\db\ActiveQuery
      * @param $userId
      * @return ProjectQuery
      */
-    public function byUser($userId)
+    public function byUser($userId,$role = null)
     {
-        $query = ProjectUser::find()->select('project_id')->byUser($userId);
+        $query = ProjectUser::find()->select('project_id')->byUser($userId,$role);
         return $this->andWhere(['id' => $query]);
     }
 

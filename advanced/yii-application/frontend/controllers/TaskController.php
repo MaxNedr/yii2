@@ -3,12 +3,14 @@
 namespace frontend\controllers;
 
 use common\models\Project;
+use common\models\ProjectUser;
 use common\models\query\ProjectQuery;
 use common\models\search\TaskSearchFrontend;
 use Yii;
 use common\models\Task;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -31,9 +33,9 @@ class TaskController extends Controller
             ],
             'access' => [
                 'class' => AccessControl::class,
+
                 'rules' => [
                     [
-
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -79,11 +81,17 @@ class TaskController extends Controller
      * Creates a new Task model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionCreate()
     {
+
         $model = new Task();
-        $projects = Project::find()->select('title')->indexBy('id')->column();
+        $projects = Project::find()
+            ->select('title')
+            ->indexBy('id')
+            ->byUser(Yii::$app->user->id, ProjectUser::ROLE_MANAGER)
+            ->column();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'The task is create successfully');
