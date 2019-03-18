@@ -96,7 +96,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['username', 'email'], 'unique'],
             [['username', 'email', 'auth_key', 'password'], 'safe'],
             [['username', 'email'], 'required', 'on' => [self::SCENARIO_INSERT]],
-           ['password', 'required', 'on' => self::SCENARIO_INSERT],
+            //['password', 'required', 'on' => self::SCENARIO_INSERT],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => self::STATUSES],
             [
@@ -118,13 +118,16 @@ class User extends ActiveRecord implements IdentityInterface
     public function beforeSave($insert)
     {
         if (!parent::beforeSave($insert)) {
+
             return false;
         }
         if ($this->isNewRecord) {
             $this->generateAuthKey();
         }
+
         return true;
     }
+
     /**
      * {@inheritdoc}
      * @return \common\models\query\UserQuery the active query used by this AR class.
@@ -241,7 +244,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function setPassword($password)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        if ($password) {
+            $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        }
+        $this->password = $password;
 
     }
 
@@ -324,7 +330,8 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @return array
      */
-    public function findAllUsernames() {
+    public function findAllUsernames()
+    {
         return self::find()->select('username')->indexBy('id')->column();
     }
 
@@ -333,7 +340,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getAvatar()
     {
-        return $this->getThumbUploadUrl('avatar',self::AVATAR_ICO);
+        return $this->getThumbUploadUrl('avatar', self::AVATAR_ICO);
     }
 
     /**
