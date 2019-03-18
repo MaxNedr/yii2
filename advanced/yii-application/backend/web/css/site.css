@@ -118,3 +118,11 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.d-flex-center{
+    display: flex;
+    justify-content: center;
+}
+.border-rounded-circle{
+    border-radius: 50%;
+}

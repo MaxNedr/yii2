@@ -2,19 +2,11 @@
 namespace common\services;
 
 
+use common\services\events\AssignRoleEvent;
 use common\models\Project;
 use common\models\User;
 
-class AssignRoleEvent extends \yii\base\Event
-{
-    public $project;
-    public $user;
-    public $role;
 
-    /*public function dump(){
-        return ['project'=>$this->project->id, 'user'=> $this->user->id, 'role'=>$this->role];
-    }*/
-}
 
 
 class ProjectService extends \yii\base\Component

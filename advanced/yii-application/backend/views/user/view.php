@@ -14,10 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <div class="img-responsive m-3"><?= Html::tag('img',
+    <div class="d-flex-center m-3"><?= Html::tag('img',
             '', [
                 'src' => $model->getThumbUploadUrl('avatar', \common\models\User::AVATAR_PREVIEW),
-                'class' => 'border border-primary rounded-circle']
+                'class' => 'border border-rounded-circle']
         ) ?></div>
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

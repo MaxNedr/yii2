@@ -8,11 +8,28 @@ use common\models\Project;
 use common\models\ProjectUser;
 use common\models\Task;
 use common\models\User;
+use common\services\events\UserTakeTaskEvent;
 use Yii;
 use yii\base\Component;
 
 class TaskService extends Component
 {
+    const EVENT_USER_TAKE_TASK = 'event_user_take_task';
+
+    /**
+     * @param Project $project
+     * @param User $user
+     * @param $role string
+     * @param Task $task
+     */
+    function userTakeTask(Project $project, User $user, Task $task){
+        $event = new UserTakeTaskEvent();
+        $event->project = $project;
+        $event->user = $user;
+        $event->task = $task;
+        $this->trigger(self::EVENT_USER_TAKE_TASK, $event);
+    }
+
     /**
      * @param Project $project
      * @param User $user

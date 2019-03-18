@@ -19,10 +19,21 @@ class NotificationService extends Component
 
         $to = $event->user->email;
         $subject = "New role " . $event->role;
-        //$views = ['html' => 'assignRoleToProject-html', 'text' => 'assignRoleToProject-text'];
         $viewHTML =  'assignRoleToProject-html';
         $viewText =  'assignRoleToProject-text';
         $data = ['user' => $event->user, 'project' => $event->project, 'role' => $event->role];
+        Yii::$app->emailService->send($to, $subject, $viewHTML,$viewText,$data);
+    }
+    /**
+     * @param $event
+     */
+    public function notificationOfTakeTask( $event)
+    {
+        $to = $event->user->email;
+        $subject = "User " . $event->user->username." take task";
+        $viewHTML =  'takeTask-html';
+        $viewText =  'takeTask-text';
+        $data = ['user' => $event->user, 'project' => $event->project, 'task'=>$event->task];
         Yii::$app->emailService->send($to, $subject, $viewHTML,$viewText,$data);
     }
 }

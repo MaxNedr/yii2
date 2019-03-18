@@ -20,12 +20,18 @@ return [
             ],
         ],
         'emailService' => ['class' => common\services\EmailService::class],
-        'taskService' => ['class' => common\services\TaskService::class],
+        'taskService' => [
+            'class' => common\services\TaskService::class,
+            'on ' . \common\services\TaskService::EVENT_USER_TAKE_TASK =>
+                function (\common\services\events\UserTakeTaskEvent $e) {
+                    Yii::$app->notificationService->notificationOfTakeTask($e);
+                }
+        ],
         'notificationService' => ['class' => common\services\NotificationService::class],
         'projectService' => [
             'class' => common\services\ProjectService::class,
             'on ' . \common\services\ProjectService::EVENT_ASSIGN_ROLE =>
-                function (\common\services\AssignRoleEvent $e) {
+                function (\common\services\events\AssignRoleEvent $e) {
                     Yii::$app->notificationService->notificationOfNewRoles($e);
                 }
         ],
