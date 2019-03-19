@@ -136,8 +136,7 @@ class TaskController extends Controller
     {
         $model = $this->findModel($id);
         $project = Project::findOne(['id' => $model->project_id]);
-        $user = User::findOne(['id' => $model->creator_id]);//надо правильного юзера указать
-
+        $user = Yii::$app->user->identity;
 
         if (Yii::$app->taskService->takeTask($model,Yii::$app->user->identity)) {
             Yii::$app->session->setFlash('success', 'Task: ' . $model->title . ' is taken in work');

@@ -29,7 +29,6 @@ class NotificationService extends Component
      */
     public function notificationOfTakeTask( $event)
     {
-        //$to = $event->user->email;
         $to = $event->manager->email;
         $subject = "User " . $event->user->username." take task";
         $viewHTML =  'takeTask-html';

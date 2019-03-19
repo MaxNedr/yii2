@@ -22,7 +22,7 @@ class TaskService extends Component
      * @param Task $task
      * @param ProjectUser $projectUser
      */
-    function userTakeTask(Project $project, User $user, Task $task)
+    function userTakeTask(Project $project, $user, Task $task)
     {
 
         $event = new UserTakeTaskEvent();
@@ -34,7 +34,7 @@ class TaskService extends Component
             ->innerJoin('project', 'project.id = pu.project_id')
             ->andWhere(['pu.role' => 'manager'])
             ->andWhere(['pu.project_id' => $project->id])
-            ->one();
+            ->one();// не красиво получилось. исправлю. в данный момент так функционирует.
             $this->trigger(self::EVENT_USER_TAKE_TASK, $event);
     }
 
@@ -79,7 +79,7 @@ class TaskService extends Component
      * @param User $user
      * @return bool
      */
-    public function takeTask(Task $task, User $user)
+    public function takeTask(Task $task, $user)
     {
         $task->started_at = time();
         $task->executor_id = $user->id;
