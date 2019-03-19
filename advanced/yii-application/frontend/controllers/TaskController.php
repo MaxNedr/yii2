@@ -159,9 +159,16 @@ class TaskController extends Controller
     public function actionComplete($id)
     {
         $model = $this->findModel($id);
+        $project = Project::findOne(['id' => $model->project_id]);
+        $user = Yii::$app->user->identity;
 
         if (Yii::$app->taskService->completeTask($model)) {
             Yii::$app->session->setFlash('success', 'Task: ' . $model->title . ' complete successfully');
+            Yii::$app->taskService->userCompleteTask(
+                $project,
+                $user,
+                $model
+            );
             return $this->redirect(['view', 'id' => $model->id]);
         }
         Yii::$app->session->setFlash('warning', "Something's wrong");

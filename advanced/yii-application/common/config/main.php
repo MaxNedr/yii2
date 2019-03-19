@@ -25,6 +25,10 @@ return [
             'on ' . \common\services\TaskService::EVENT_USER_TAKE_TASK =>
                 function (\common\services\events\UserTakeTaskEvent $e) {
                     Yii::$app->notificationService->notificationOfTakeTask($e);
+                },
+            'on ' . \common\services\TaskService::EVENT_USER_COMPLETE_TASK =>
+                function (\common\services\events\UserCompleteTaskEvent $e) {
+                    Yii::$app->notificationService->notificationOfCompleteTask($e);
                 }
         ],
         'notificationService' => ['class' => common\services\NotificationService::class],

@@ -36,4 +36,17 @@ class NotificationService extends Component
         $data = ['user' => $event->user, 'project' => $event->project, 'task'=>$event->task];
         Yii::$app->emailService->send($to, $subject, $viewHTML,$viewText,$data);
     }
+
+    /**
+     * @param $event
+     */
+    public function notificationOfCompleteTask( $event)
+    {
+        $to = $event->tester->email;
+        $subject = "User " . $event->user->username." complete task";
+        $viewHTML =  'completeTask-html';
+        $viewText =  'completeTask-text';
+        $data = ['user' => $event->user, 'project' => $event->project, 'task'=>$event->task];
+        Yii::$app->emailService->send($to, $subject, $viewHTML,$viewText,$data);
+    }
 }
