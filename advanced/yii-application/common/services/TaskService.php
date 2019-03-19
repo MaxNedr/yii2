@@ -19,15 +19,23 @@ class TaskService extends Component
     /**
      * @param Project $project
      * @param User $user
-     * @param $role string
      * @param Task $task
+     * @param ProjectUser $projectUser
      */
-    function userTakeTask(Project $project, User $user, Task $task){
+    function userTakeTask(Project $project, User $user, Task $task)
+    {
+
         $event = new UserTakeTaskEvent();
         $event->project = $project;
         $event->user = $user;
         $event->task = $task;
-        $this->trigger(self::EVENT_USER_TAKE_TASK, $event);
+        $event->manager = User::find()->select('email')
+            ->innerJoin('project_user pu', 'user.id = pu.user_id')
+            ->innerJoin('project', 'project.id = pu.project_id')
+            ->andWhere(['pu.role' => 'manager'])
+            ->andWhere(['pu.project_id' => $project->id])
+            ->one();
+            $this->trigger(self::EVENT_USER_TAKE_TASK, $event);
     }
 
     /**
@@ -75,12 +83,12 @@ class TaskService extends Component
     {
         $task->started_at = time();
         $task->executor_id = $user->id;
-        return  $task->save();
+        return $task->save();
     }
 
     public function completeTask(Task $task)
     {
         $task->completed_at = time();
-        return  $task->save();
+        return $task->save();
     }
 }

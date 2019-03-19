@@ -77,6 +77,7 @@ class ProjectUser extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
+
     /**
      * {@inheritdoc}
      * @return \common\models\query\ProjectUserQuery the active query used by this AR class.
